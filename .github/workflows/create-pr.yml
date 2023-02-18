@@ -15,6 +15,11 @@ jobs:
       - name: checkout new branch
         run: |
           git checkout -b new_branch
-      - name: show branch
+      - name: change some file
         run: |
-          git branch
+          echo 'some change' >> readme.md
+      - name: commit new change
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: add some change
+          branch: new_branch
