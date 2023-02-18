@@ -42,3 +42,12 @@ jobs:
         with:
           commit_message: add some change
           branch: new_branch
+      - name: create pr
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          gh pr create \
+            -B main
+            -H new_branch
+            -t "test PR"
+            -b "- [ ] テストです"
