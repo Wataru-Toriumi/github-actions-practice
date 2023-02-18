@@ -18,7 +18,7 @@ jobs:
         id: check_branch
         run: |
           git fetch origin
-          echo "is_branch_exists=$(git branch -r | grep -c new_branch)" >> $GITHUB_OUTPUT
+          echo "is_branch_exists=$(git branch -r | grep -c \"new_branch\")" >> $GITHUB_OUTPUT
       - name: checkout new branch
         if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
         run: |
