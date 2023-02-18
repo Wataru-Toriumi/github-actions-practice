@@ -12,8 +12,9 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: sample_branch
+      - name: checkout new branch
+        run: |
+          git checkout -b new_branch
       - name: show branch
         run: |
           git branch
