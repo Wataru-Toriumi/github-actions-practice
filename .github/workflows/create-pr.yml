@@ -17,8 +17,14 @@ jobs:
       - name: checkout new branch
         run: |
           git checkout -b new_branch
-      - name: pull current state
+      - name: check if branch exists
+        id: check_branch
         run: |
+          echo "is_branch_exists=(git branch -r | grep new_branch | wc -l)" >> $GITHUB_OUTPUT
+      - name: pull current state
+        if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
+        run: |
+          git config pull.rebase false
           git pull origin new_branch
       - name: change some file
         run: |
