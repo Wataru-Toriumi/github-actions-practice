@@ -20,10 +20,8 @@ jobs:
       - name: check if branch exists
         id: check_branch
         run: |
-          git branch -r
-          echo "git branch -r | grep new_branch"
-          echo "git branch -r | grep new_branch | wc -l"
-          echo "is_branch_exists=(git branch -r | grep new_branch | wc -l)" >> $GITHUB_OUTPUT
+          echo "$(git branch -r | grep new_branch | wc -l)"
+          echo "is_branch_exists=$(git branch -r | grep new_branch | wc -l)" >> $GITHUB_OUTPUT
       - name: pull current state
         if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
         run: |
