@@ -14,15 +14,21 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - name: checkout new branch
-        run: |
-          git checkout -b new_branch
       - name: check if branch exists
         id: check_branch
         run: |
-          git branch -r
-          echo "$(git branch -r | grep new_branch | wc -l)"
-          echo "is_branch_exists=$(git branch -r | grep new_branch | wc -l)" >> $GITHUB_OUTPUT
+          git fetch origin
+          git branch
+          echo "$(git branch | grep -c new_branch)"
+          echo "is_branch_exists=$(git branch | grep -c new_branch)" >> $GITHUB_OUTPUT
+      - name: checkout new branch
+        if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
+        run: |
+          git checkout new_branch
+      - name: checkout new branch 2
+        if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
+        run: |
+          git checkout -b new_branch
       - name: pull current state
         if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
         run: |
