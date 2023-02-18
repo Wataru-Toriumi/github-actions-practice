@@ -26,7 +26,7 @@ jobs:
         run: |
           git checkout new_branch
       - name: checkout new branch 2
-        if: ${{steps.check_branch.outputs.is_branch_exists != 0}}
+        if: ${{steps.check_branch.outputs.is_branch_exists == 0}}
         run: |
           git checkout -b new_branch
       - name: pull current state
