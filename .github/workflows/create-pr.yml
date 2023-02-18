@@ -17,6 +17,9 @@ jobs:
       - name: checkout new branch
         run: |
           git checkout -b new_branch
+      - name: pull current state
+        run: |
+          git pull origin new_branch
       - name: change some file
         run: |
           echo 'some change' >> readme.md
