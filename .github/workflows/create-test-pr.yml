@@ -1,4 +1,4 @@
-name: test gihtub commands
+name: test gihtub commands to create-pr
 on:
   workflow_dispatch:
     inputs:
