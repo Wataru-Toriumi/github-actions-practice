@@ -41,6 +41,7 @@ jobs:
           commit_message: add some change
           branch: new_branch
       - name: check if PR exists
+        id: check_pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -49,6 +50,7 @@ jobs:
       - name: create pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ steps.check_pr.outputs.pr_count == 0 }}
         run: |
           gh pr create \
             -B main -H new_branch \
