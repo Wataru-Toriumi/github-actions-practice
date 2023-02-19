@@ -12,6 +12,7 @@ jobs:
     timeout-minutes: 3
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - name: check if branch exists
