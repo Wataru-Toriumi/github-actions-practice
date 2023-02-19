@@ -40,6 +40,10 @@ jobs:
         with:
           commit_message: add some change
           branch: new_branch
+      - name: check if PR exists
+        run: |
+          gh search prs test PR --state open
+          echo "pr_count=$(gh search prs test PR --state open | wc -l)"
       - name: create pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
