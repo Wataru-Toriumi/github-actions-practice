@@ -15,6 +15,7 @@ jobs:
         run: |
           has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c version || echo 0)"
           echo "$has_diff"
+          echo "has_diff=$has_diff"
           echo "has_diff=$has_diff" >> "$GITHUB_OUTPUT"
       - id: echo
         if: ${{ steps.check-diff.outputs.has_diff == 0 }}
