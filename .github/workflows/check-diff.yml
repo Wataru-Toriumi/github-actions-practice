@@ -13,5 +13,5 @@ jobs:
           fetch-depth: 0
       - id: check-diff
         run: |
-          has_diff=$(git diff origin/main..HEAD -- readme.md | grep -c version)
+          has_diff=$(git diff origin/main..HEAD -- readme.md)
           echo $has_diff
