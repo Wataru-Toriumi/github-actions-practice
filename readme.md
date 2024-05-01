@@ -22,4 +22,4 @@ some change
 some change
 some change
 some change
-version:2
+version
