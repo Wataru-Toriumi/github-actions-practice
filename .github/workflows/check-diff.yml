@@ -1,0 +1,17 @@
+name: check-diff
+on:
+  push:
+    branches:
+      - develop
+      - feature/c
+jobs:
+  git-pr-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - id: check-diff
+        run: |
+          has_diff=$(git diff origin/main..HEAD -- readme.md | grep -c version)
+          echo $has_diff
