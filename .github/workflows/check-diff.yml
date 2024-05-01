@@ -13,8 +13,8 @@ jobs:
           fetch-depth: 0
       - id: check-diff
         run: |
-          has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c version)"
+          has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c version || echo '0')"
           echo "has_diff=$has_diff" >> "$GITHUB_OUTPUT"
       - id: echo
-        if: ${{ steps.check-diff.outputs.has_diff == 2 }}
+        if: ${{ steps.check-diff.outputs.has_diff == 0 }}
         run: echo "呼ばれたよ"
