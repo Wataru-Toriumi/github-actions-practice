@@ -14,7 +14,7 @@ jobs:
       - name: check diff
         id: check-diff
         run: |
-          has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c version)"
+          has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c --no-messages version)"
           echo "$has_diff"
           echo "changed=$has_diff"
           echo "changed=$has_diff" >> "$GITHUB_OUTPUT"
