@@ -1,0 +1,24 @@
+name: check-diff
+on:
+  push:
+    branches:
+      - develop
+      - feature/c
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: check diff
+        id: check-diff
+        run: |
+          has_diff="$(git diff origin/main..HEAD -- readme.md | grep -c version || [[ $? == 1 ]])"
+          echo "$has_diff"
+          echo "changed=$has_diff"
+          echo "changed=$has_diff" >> "$GITHUB_OUTPUT"
+      - name: echo yobaretayo
+        id: echo
+        if: ${{ steps.check-diff.outputs.changed == 0 }}
+        run: echo "呼ばれたよ"
